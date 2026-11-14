@@ -1,0 +1,16 @@
+# Build output and run directories of both projects
+**/build/
+**/run/
+**/.gradle/
+**/logs/
+**/.mixin.out/
+**/*.log
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+Thumbs.db
+.DS_Store
