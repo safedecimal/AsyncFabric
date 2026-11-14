@@ -48,14 +48,17 @@ jobs:
           published=$(ls "$HOME/.m2/repository/net/asyncfabric/asyncfabric-loader/" | grep '^0\.' | head -1)
           echo "Published loader: $published"
           python3 - "$published" <<'PY'
-          import sys, pathlib
+          import pathlib, re, sys
           version = sys.argv[1]
           path = pathlib.Path("AsyncFabricApi/gradle/libs.versions.toml")
-          lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
-          out = [
-              f'asyncfabric-loader = "{version}"\n' if line.startswith("asyncfabric-loader = ") else line
-              for line in lines
-          ]
+          out = []
+          for line in path.read_text(encoding="utf-8").splitlines(keepends=True):
+              # Only the [versions] entry holds a bare quoted version. The [libraries] entry
+              # reuses the same alias with a map value; rewriting it breaks the catalog.
+              if re.match(r'^asyncfabric-loader\s*=\s*"[^"]*"\s*$', line):
+                  out.append(f'asyncfabric-loader = "{version}"\n')
+              else:
+                  out.append(line)
           path.write_text("".join(out), encoding="utf-8")
           PY
           grep '^asyncfabric-loader = ' AsyncFabricApi/gradle/libs.versions.toml
