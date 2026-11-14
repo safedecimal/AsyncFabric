@@ -1,0 +1,124 @@
+name: Build
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  loader:
+    name: Loader
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: microsoft
+          java-version: '25'
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build and test
+        working-directory: AsyncFabricLoader
+        run: ./gradlew build -x javadoc --stacktrace
+
+      - name: Publish loader to the local maven repository
+        # The API depends on the loader through mavenLocal(), so it has to be there before the
+        # API is built at all. This is also why the two jobs cannot run fully independently.
+        #
+        # GITHUB_ACTIONS is cleared for this step on purpose: the loader stamps its version with
+        # "+async" on CI and "+async.local" locally, while the API's version catalog pins
+        # "+async.local". Leaving it set would publish a version the API never asks for, and the
+        # API build would fail to resolve the loader instead of testing the code.
+        working-directory: AsyncFabricLoader
+        env:
+          GITHUB_ACTIONS: "false"
+        run: ./gradlew publishToMavenLocal -x javadoc --stacktrace
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: asyncfabric-loader
+          # The executable jar plus the installer metadata that lists the libraries it needs
+          # (Mixin, ASM, ...). Those libraries are not bundled, so the json matters.
+          path: |
+            AsyncFabricLoader/build/libs/asyncfabric-loader-*.jar
+            AsyncFabricLoader/build/libs/asyncfabric-loader-*.json
+            !AsyncFabricLoader/build/libs/*-sources.jar
+            !AsyncFabricLoader/build/libs/*-javadoc.jar
+            !AsyncFabricLoader/build/libs/*-fat.jar
+            !AsyncFabricLoader/build/libs/*-signed.jar
+          if-no-files-found: error
+
+      - name: Cache the published loader for the API job
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.m2/repository/net/asyncfabric
+          key: loader-m2-${{ github.sha }}
+
+  api:
+    name: API
+    needs: loader
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: microsoft
+          java-version: '25'
+
+      - name: Restore the published loader
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.m2/repository/net/asyncfabric
+          key: loader-m2-${{ github.sha }}
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build and test
+        # -x javadoc: javadoc is not a gate here, and it needs the full remapped classpath.
+        # The heap is raised in gradle.properties; at 4G the daemon died mid-remap and the
+        # failure surfaced as missing classtweaker members instead of an OOM.
+        working-directory: AsyncFabricApi
+        run: ./gradlew build -x javadoc --stacktrace
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: asyncfabric-api
+          # The aggregate jar nests every module jar, so the per-module jars are left out to keep
+          # the download from doubling in size.
+          path: |
+            AsyncFabricApi/build/libs/asyncfabric-api-*.jar
+            !AsyncFabricApi/build/libs/*-sources.jar
+            !AsyncFabricApi/build/libs/*-javadoc.jar
+            !AsyncFabricApi/build/libs/*-testmod.jar
+          if-no-files-found: error
+
+      - name: Write test summary
+        if: always()
+        run: |
+          {
+            echo "## Test results"
+            echo
+            for report in $(find AsyncFabricApi AsyncFabricLoader -path '*/test-results/test/*.xml' 2>/dev/null); do
+              tests=$(grep -o 'tests="[0-9]*"' "$report" | head -1 | grep -o '[0-9]*')
+              failures=$(grep -o 'failures="[0-9]*"' "$report" | head -1 | grep -o '[0-9]*')
+              errors=$(grep -o 'errors="[0-9]*"' "$report" | head -1 | grep -o '[0-9]*')
+              name=$(basename "$report" .xml | sed 's/^TEST-//')
+              echo "- \`$name\`: $tests tests, $failures failures, $errors errors"
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-results
+          path: |
+            AsyncFabricApi/**/build/reports/tests/
+            AsyncFabricLoader/build/reports/tests/
+          if-no-files-found: ignore
