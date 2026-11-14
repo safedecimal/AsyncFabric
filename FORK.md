@@ -202,3 +202,32 @@ ticks almost nothing; the probe spawns near spawn and still finds zero entities
 off-line. Meaningful in-world verification needs a client connected.
 
 
+
+## Known problem: API build from a clean checkout
+
+`./gradlew build` in `AsyncFabricApi` succeeds in a warm working copy and fails in a fresh
+clone, including on CI. The failure is `cannot find symbol` for members that only exist
+through a classtweaker — `addTask`, `completeTask`, `getFabricPackSource`,
+`getTranslationKey`, `PoiTypes.register` — and the set of failing modules changes between
+runs, so it is not a missing source file.
+
+What has been ruled out, all by experiment:
+
+- **Sources differ.** They do not: `diff -r` over the module trees, and `cmp` over the
+  classtweakers, show byte-identical files against a copy that builds.
+- **Heap.** 4G and 8G both build and both fail; the daemon disappearing was a red herring
+  caused by running two builds at once.
+- **Project parallelism.** `org.gradle.parallel=false`, `--no-parallel` and
+  `--workers.max=1` each produced a green run once and failed on the next attempt.
+- **Configuration cache.** `--no-configuration-cache` made no difference.
+- **Build order.** Pre-building the classtweaker-providing modules, and running the build
+  twice, both helped sometimes and not others.
+- **Absolute path length.** A copy under a shorter path built; a longer one did not; not
+  reproducible.
+
+What is certain: Loom remaps one Minecraft jar per project, and the resulting artifact's
+content varies with the set of classtweakers present when it is built. Everything points at
+that step, but the trigger has not been isolated.
+
+The CI workflow deliberately does not hide this: a red run means the API genuinely did not
+build. The loader job passes, so the loader side is exercised on every push.
