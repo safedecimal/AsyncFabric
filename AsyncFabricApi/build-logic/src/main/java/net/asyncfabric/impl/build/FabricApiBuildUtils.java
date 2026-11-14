@@ -22,6 +22,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -100,11 +102,39 @@ public final class FabricApiBuildUtils {
 		}
 
 		Provider<String> hashProvider = project.getProviders().of(CommitHashValueSource.class, spec -> {
-			spec.getParameters().getDirectory().set(project.getName());
+			spec.getParameters().getDirectory().set(gitPath(project));
 		});
 
-		return version + "+" + hashProvider.get().substring(0, 8) + sha256Hex(project.getRootProject().property("minecraft_version").toString()).substring(0, 2);
+		String hash = hashProvider.get();
+
+		if (hash.isEmpty()) {
+			// A commit hash is part of the published version, so this cannot be papered over: an
+			// empty one produced StringIndexOutOfBoundsException from substring() before.
+			throw new IllegalStateException("git log returned no commit for path '" + gitPath(project)
+					+ "' (project " + project.getPath() + "); is the module committed?");
+		}
+
+		return version + "+" + hash.substring(0, 8) + sha256Hex(project.getRootProject().property("minecraft_version").toString()).substring(0, 2);
 	}
+
+	/**
+	 * @param project a module project
+	 * @return the module's path relative to the Gradle root project, using forward slashes
+	 *
+	 * <p>{@code git log -- <path>} resolves the path against the working directory of the git
+	 * process, and Gradle starts it in the root project's directory. In a monorepo that is not the
+	 * git repository root, so a path relative to the repository root (the previous attempt at
+	 * this) does not resolve either. What matters is the path from where git runs.
+	 */
+	private static String gitPath(Project project) {
+		Path rootDir = project.getRootProject().getProjectDir().toPath();
+		Path relative = rootDir.relativize(project.getProjectDir().toPath());
+		String path = relative.toString().replace('\\', '/');
+
+		// a project directly at the Gradle root relativizes to "" on some platforms
+		return path.isEmpty() ? "." : path;
+	}
+
 
 	public static String version(Project project, String alias) {
 		return libs(project).findVersion(alias)
