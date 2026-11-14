@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "test",
+  "name": "Test Mod",
+  "version": "1.0.0",
+  "side": "client",
+  "entrypoints": {
+    "preLaunch": [
+      "net.asyncfabric.test.TestMod"
+    ],
+    "main": [
+      "net.asyncfabric.test.TestMod",
+      "net.asyncfabric.test.EntrypointTest$EntrypointCtorTest::<init>"
+    ],
+    "test:testing": [
+      "net.asyncfabric.test.EntrypointTest::instanceEntry",
+      "net.asyncfabric.test.EntrypointTest::staticEntry",
+      "net.asyncfabric.test.EntrypointTest::FIELD_ENTRY"
+    ]
+  }
+}

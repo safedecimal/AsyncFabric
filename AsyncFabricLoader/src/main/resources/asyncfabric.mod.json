@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabricloader",
+  "name": "AsyncFabric Loader",
+  "version": "${version}",
+  "environment": "*",
+  "description": "The base mod loader. AsyncFabric fork of Fabric Loader.",
+  "contact": {
+    "homepage": "https://github.com/AsyncFabric/AsyncFabricLoader",
+    "issues": "https://github.com/AsyncFabric/AsyncFabricLoader/issues",
+    "sources": "https://github.com/AsyncFabric/AsyncFabricLoader"
+  },
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabricloader/icon.png",
+  "authors": [
+    "AsyncFabric",
+    "FabricMC"
+  ],
+  "provides": [
+    "fabricloader"
+  ]
+}
