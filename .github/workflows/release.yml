@@ -27,15 +27,40 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
 
       # The API resolves the loader from mavenLocal(), so the loader goes first.
-      # GITHUB_ACTIONS is cleared so the published version matches the "+async.local" the API's
-      # version catalog pins; otherwise the API cannot resolve the loader.
       - name: Build loader
         working-directory: AsyncFabricLoader
-        env:
-          # Empty, not "false": the loader tests ENV.GITHUB_ACTIONS for truthiness, and the
-          # string "false" is non-empty, hence true in Groovy.
-          GITHUB_ACTIONS: ""
         run: ./gradlew build publishToMavenLocal -x javadoc --stacktrace
+
+      - name: Align the API's loader version with what was published
+        # GITHUB_ACTIONS cannot be overridden from `env:` — the runner injects it — so the loader
+        # publishes "+async" here while the catalog pins "+async.local". Rewrite the pin instead
+        # of fighting the variable. Module manifests depend on ">=0.20.1" without build metadata,
+        # so changing the catalog entry is safe.
+        run: |
+          published=$(ls "$HOME/.m2/repository/net/asyncfabric/asyncfabric-loader/" | grep '^0\.' | head -1)
+          echo "Published loader: $published"
+          python3 - "$published" <<'PY'
+          import sys, pathlib
+          version = sys.argv[1]
+          path = pathlib.Path("AsyncFabricApi/gradle/libs.versions.toml")
+          lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
+          out = [
+              f'asyncfabric-loader = "{version}"\n' if line.startswith("asyncfabric-loader = ") else line
+              for line in lines
+          ]
+          path.write_text("".join(out), encoding="utf-8")
+          PY
+          grep '^asyncfabric-loader = ' AsyncFabricApi/gradle/libs.versions.toml
+
+      - name: Verify the published loader version
+        run: |
+          expected=$(awk -F'"' '/^asyncfabric-loader = /{print $2; exit}' AsyncFabricApi/gradle/libs.versions.toml)
+          echo "API expects: $expected"
+          ls ~/.m2/repository/net/asyncfabric/asyncfabric-loader/
+          if [ ! -f "$HOME/.m2/repository/net/asyncfabric/asyncfabric-loader/$expected/asyncfabric-loader-$expected.pom" ]; then
+            echo "::error::published loader version does not match the API version catalog"
+            exit 1
+          fi
 
       - name: Build API
         working-directory: AsyncFabricApi
