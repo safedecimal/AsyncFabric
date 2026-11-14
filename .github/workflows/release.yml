@@ -32,7 +32,9 @@ jobs:
       - name: Build loader
         working-directory: AsyncFabricLoader
         env:
-          GITHUB_ACTIONS: "false"
+          # Empty, not "false": the loader tests ENV.GITHUB_ACTIONS for truthiness, and the
+          # string "false" is non-empty, hence true in Groovy.
+          GITHUB_ACTIONS: ""
         run: ./gradlew build publishToMavenLocal -x javadoc --stacktrace
 
       - name: Build API
