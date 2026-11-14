@@ -1,0 +1,15 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+loom {
+	accessWidenerPath = file('src/client/resources/asyncfabric-sound-api-v1.classtweaker')
+}
+
+fabricApiModule {
+	testDependencies(
+		':asyncfabric-api-base',
+		':asyncfabric-resource-loader-v1',
+		':asyncfabric-command-api-v2'
+	)
+}

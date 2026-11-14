@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "net.asyncfabric.test.block.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "ChiseledBookShelfBlockMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

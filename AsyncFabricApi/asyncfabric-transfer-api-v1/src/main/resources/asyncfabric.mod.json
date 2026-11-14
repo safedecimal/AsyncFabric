@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-transfer-api-v1",
+  "name": "AsyncFabric Transfer API (v1)",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-transfer-api-v1/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-api-lookup-api-v1": "*",
+    "asyncfabric-rendering-fluids-v1": "*"
+  },
+  "description": "A common API for the transfer of fluids, items and other game resources.",
+  "mixins": [
+    "asyncfabric-transfer-api-v1.mixins.json"
+  ],
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  }
+}

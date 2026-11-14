@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-dimensions-v1",
+  "name": "AsyncFabric Dimensions API (v1)",
+  "version": "${version}",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-dimensions-v1/icon.png",
+  "contact" : {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.impl.dimension.DimensionModificationImpl"
+    ]
+  },
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "minecraft": ">=1.16-rc.3",
+    "asyncfabric-api-base": "*"
+  },
+  "description": "AsyncFabric Dimension API.",
+  "mixins": [
+    "asyncfabric-dimensions-v1.mixins.json"
+  ],
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  }
+}

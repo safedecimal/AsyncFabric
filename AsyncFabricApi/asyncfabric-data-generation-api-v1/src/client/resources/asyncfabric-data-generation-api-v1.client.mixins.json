@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "net.asyncfabric.mixin.datagen.client",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "MinecraftMixin",
+    "ModelProviderBlockStateGeneratorCollectorMixin",
+    "ModelProviderItemInfoCollectorMixin",
+    "ModelProviderMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

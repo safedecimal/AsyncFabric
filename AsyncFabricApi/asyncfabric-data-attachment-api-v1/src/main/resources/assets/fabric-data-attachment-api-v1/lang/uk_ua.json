@@ -1,0 +1,11 @@
+{
+  "asyncfabric-data-attachment-api-v1.unknown-target.attachment-identifier": "Ідентифікатор вкладення: %s",
+  "asyncfabric-data-attachment-api-v1.unknown-target.block-entity-position": "Позиція блоку-сутности: %s",
+  "asyncfabric-data-attachment-api-v1.unknown-target.chunk-position": "Позиція чанку: %s",
+  "asyncfabric-data-attachment-api-v1.unknown-target.entity-network-id": "ID сутности мережі: %s",
+  "asyncfabric-data-attachment-api-v1.unknown-target.target-type": "Тип цілі: %s",
+  "asyncfabric-data-attachment-api-v1.unknown-target.target-type.block-entity": "Блок-сутність",
+  "asyncfabric-data-attachment-api-v1.unknown-target.target-type.chunk": "Чанк",
+  "asyncfabric-data-attachment-api-v1.unknown-target.target-type.entity": "Сутність",
+  "asyncfabric-data-attachment-api-v1.unknown-target.title": "Отримано зміну вкладення для невідомої цілі!"
+}

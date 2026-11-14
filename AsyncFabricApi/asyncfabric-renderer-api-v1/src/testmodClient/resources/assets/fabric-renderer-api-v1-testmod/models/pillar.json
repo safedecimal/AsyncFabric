@@ -1,0 +1,9 @@
+{
+  "fabric:type": "asyncfabric-renderer-api-v1-testmod:builtin_mesh",
+  "parent": "block/block",
+  "textures": {
+    "pillar": "asyncfabric-renderer-api-v1-testmod:block/pillar_alone",
+    "particle": "#pillar"
+  },
+  "mesh": "pillar"
+}

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-object-builder-api-v1",
+  "name": "AsyncFabric Object Builder API (v1)",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-object-builder-api-v1/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-api-base": "*",
+    "asyncfabric-registry-sync-v0": "*",
+    "asyncfabric-transitive-access-wideners-v1": "*"
+  },
+  "description": "Builders for objects vanilla has locked down.",
+  "mixins": [
+    "asyncfabric-object-builder-v1.mixins.json",
+    {
+      "config": "asyncfabric-object-builder-v1.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "accessWidener" : "asyncfabric-object-builder-api-v1.classtweaker",
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  }
+}

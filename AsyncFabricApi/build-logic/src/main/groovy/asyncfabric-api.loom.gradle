@@ -1,0 +1,63 @@
+import net.fabricmc.loom.task.tool.ModEnigmaTask
+import net.asyncfabric.impl.build.FabricApiBuildUtils
+
+plugins {
+	id "net.fabricmc.fabric-loom"
+}
+
+loom {
+	splitEnvironmentSourceSets()
+	runtimeOnlyLog4j = true
+	runs.configureEach {
+		preferGradleTask = true
+	}
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:$rootProject.minecraft_version"
+	api FabricApiBuildUtils.library(project, "asyncfabric-loader")
+}
+
+tasks.withType(ProcessResources).configureEach {
+	def modVersion = project.version.toString()
+	inputs.property "version", modVersion
+
+	filesMatching("asyncfabric.mod.json") {
+		expand "version": modVersion
+	}
+}
+
+/*
+ * Upstream Loom hardcodes "fabric.mod.json" when nesting jars and remapping
+ * (JarNester, RemapJarTask, ModProcessor, ...). AsyncFabric ships its metadata
+ * as asyncfabric.mod.json, so emit a build-time copy under the legacy name to
+ * keep Loom working. Sources stay clean: only the build output carries it.
+ */
+tasks.withType(ProcessResources).configureEach {
+	doLast {
+		def resourcesDir = destinationDir
+		def asyncManifest = new File(resourcesDir, "asyncfabric.mod.json")
+
+		if (asyncManifest.exists()) {
+			def legacyManifest = new File(resourcesDir, "fabric.mod.json")
+
+			if (!legacyManifest.exists()) {
+				legacyManifest.bytes = asyncManifest.bytes
+			}
+		}
+	}
+}
+
+tasks.register('generateResources') {
+	group = "fabric"
+}
+
+tasks.register('enigma', ModEnigmaTask) {
+	def clientOnly = file('src/client').exists() && !file('src/main').exists()
+	def dir = clientOnly ? file('src/client/resources') : file('src/main/resources')
+	mappingFile = new File(dir, project.name + '.mapping')
+}
+
+repositories {
+	mavenLocal()
+}

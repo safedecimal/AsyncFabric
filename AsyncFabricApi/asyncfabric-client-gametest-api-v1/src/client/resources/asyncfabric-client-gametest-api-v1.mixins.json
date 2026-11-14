@@ -1,0 +1,40 @@
+{
+  "required": true,
+  "package": "net.asyncfabric.mixin.client.gametest",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "ClientChunkCacheAccessor",
+    "ClientChunkCacheStorageAccessor",
+    "ClientLevelAccessor",
+    "gui.CycleButtonAccessor",
+    "gui.ScreenAccessor",
+    "gui.ScreenMixin",
+    "input.GlCommandEncoderMixin",
+    "input.InputConstantsMixin",
+    "input.KeyMappingAccessor",
+    "input.KeyboardHandlerAccessor",
+    "input.MouseHandlerAccessor",
+    "input.SDLEventHandlerMixin",
+    "input.VulkanGpuSurfaceMixin",
+    "input.WindowMixin",
+    "lifecycle.OptionsAccessor",
+    "lifecycle.OptionsMixin",
+    "lifecycle.MinecraftMixin",
+    "lifecycle.DedicatedServerMixin",
+    "screenshot.NativeImageMixin",
+    "screenshot.DeltaTrackerDefaultValueAccessor",
+    "threading.MainMixin",
+    "threading.IntegratedServerMixin",
+    "threading.MinecraftMixin",
+    "threading.MinecraftServerMixin",
+    "world.CreateWorldScreenMixin",
+    "world.GameRulesAccessor"
+  ],
+  "plugin": "net.asyncfabric.impl.client.gametest.ClientGameTestMixinConfigPlugin",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  }
+}

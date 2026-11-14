@@ -1,0 +1,42 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+loom {
+	accessWidenerPath = file('src/main/resources/asyncfabric-convention-tags-v2.classtweaker')
+}
+
+fabricApiModule {
+	moduleDependencies(
+		'asyncfabric-api-base',
+		'asyncfabric-lifecycle-events-v1'
+	)
+
+	testDependencies(
+		':asyncfabric-lifecycle-events-v1',
+	)
+}
+
+fabricApi {
+	configureDataGeneration {
+		outputDirectory = file("src/generated/resources")
+		strictValidation = true
+		createSourceSet = true
+		modId = "asyncfabric-convention-tags-v2-datagen"
+	}
+}
+
+dependencies {
+	datagenImplementation project(path: ":asyncfabric-data-generation-api-v1")
+}
+
+loom {
+	runs {
+		datagen {
+			name "Data Generation"
+			ideConfigGenerated = true
+		}
+	}
+}
+
+generateResources.dependsOn runDatagen

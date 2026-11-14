@@ -1,0 +1,8 @@
+{
+  "commands.datapack.fabric.internal": "無法啟用或停用 AsyncFabric 內建資料包「%s」。",
+  "pack.description.modResources": "模組資源。",
+  "pack.name.fabricMod": "AsyncFabric 模組「%s」",
+  "pack.name.fabricMod.subPack": "AsyncFabric 模組「%s」(%s)",
+  "pack.source.builtinMod": "內建：%s",
+  "pack.source.fabricmod": "AsyncFabric 模組"
+}

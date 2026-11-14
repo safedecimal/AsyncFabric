@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-rendering-v1-testmod",
+  "name": "AsyncFabric Rendering (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.rendering.ArmorRenderingTestsInit",
+	    "net.asyncfabric.test.rendering.CustomSpriteSourcesTestInit",
+      "net.asyncfabric.test.rendering.CustomColorResolverTestInit",
+      "net.asyncfabric.test.rendering.TooltipComponentTestInit"
+    ],
+    "client": [
+      "net.asyncfabric.test.rendering.client.AdvancementRenderingTests",
+      "net.asyncfabric.test.rendering.client.AtlasTests",
+      "net.asyncfabric.test.rendering.client.ArmorRenderingTests",
+      "net.asyncfabric.test.rendering.client.BuiltInBlockModelsTest",
+      "net.asyncfabric.test.rendering.client.CustomSpriteSourcesTest",
+      "net.asyncfabric.test.rendering.client.CustomColorResolverTest",
+      "net.asyncfabric.test.rendering.client.DebugOptionsTests",
+      "net.asyncfabric.test.rendering.client.FeatureRendererTest",
+      "net.asyncfabric.test.rendering.client.RenderLayerTest",
+      "net.asyncfabric.test.rendering.client.HudStatusBarHeightsTest",
+      "net.asyncfabric.test.rendering.client.HudTests",
+      "net.asyncfabric.test.rendering.client.ItemStackOverlayTest",
+      "net.asyncfabric.test.rendering.client.SpecialBlockRendererTest",
+      "net.asyncfabric.test.rendering.client.TooltipComponentTests",
+      "net.asyncfabric.test.rendering.client.LevelRenderEventsTests",
+      "net.asyncfabric.test.rendering.client.gui.PictureInPictureRendererTest",
+      "net.asyncfabric.test.rendering.client.gui.PictureInPictureRendererTestWithNewGuiRenderer",
+      "net.asyncfabric.test.rendering.client.gui.GuiRendererNonQuadsTest"
+    ],
+    "fabric-client-gametest": [
+      "net.asyncfabric.test.rendering.client.HudStatusBarHeightsTest",
+      "net.asyncfabric.test.rendering.client.HudTests",
+      "net.asyncfabric.test.rendering.client.LevelRenderEventsTests",
+      "net.asyncfabric.test.rendering.client.gui.PictureInPictureRendererTest"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "asyncfabric-rendering-v1-testmod.client.mixins.json",
+      "environment": "client"
+    }
+  ]
+}

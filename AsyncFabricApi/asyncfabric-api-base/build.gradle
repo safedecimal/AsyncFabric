@@ -1,0 +1,11 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+fabricApiModule {
+	testDependencies(
+		':asyncfabric-command-api-v2',
+		':asyncfabric-lifecycle-events-v1',
+		':asyncfabric-screen-api-v1'
+	)
+}

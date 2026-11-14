@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-recipe-api-v1-testmod",
+  "name": "AsyncFabric Recipe API (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-recipe-api-v1":"*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.recipe.sync.RecipeSyncTest"
+    ],
+    "client": [
+      "net.asyncfabric.test.recipe.client.sync.RecipeSyncClientTest"
+    ],
+    "fabric-gametest": [
+      "net.asyncfabric.test.recipe.ingredient.ShapelessRecipeMatchTests"
+    ]
+  }
+}

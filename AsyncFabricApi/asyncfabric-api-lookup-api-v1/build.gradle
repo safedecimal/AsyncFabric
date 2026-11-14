@@ -1,0 +1,16 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+fabricApiModule {
+	moduleDependencies(
+		'asyncfabric-api-base',
+		'asyncfabric-lifecycle-events-v1'
+	)
+
+	testDependencies(
+		':asyncfabric-rendering-v1',
+		':asyncfabric-object-builder-api-v1',
+		':asyncfabric-transitive-access-wideners-v1'
+	)
+}

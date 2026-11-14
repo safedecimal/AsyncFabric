@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "package": "net.asyncfabric.mixin.client.indigo.renderer",
+  "compatibilityLevel": "JAVA_25",
+  "plugin": "net.asyncfabric.impl.client.indigo.IndigoMixinConfigPlugin",
+  "client": [
+    "BlockModelLighterAccessor",
+    "ItemFeatureRendererAccessor"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "overwrites": {
+    "requireAnnotations": true
+  },
+  "mixinextras": {
+    "minVersion": "0.5.0"
+  }
+}

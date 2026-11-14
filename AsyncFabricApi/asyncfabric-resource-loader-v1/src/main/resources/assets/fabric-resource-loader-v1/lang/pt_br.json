@@ -1,0 +1,8 @@
+{
+  "commands.datapack.fabric.internal": "Não é possível ativar ou desativar o pacote interno do AsyncFabric \"%s\".",
+  "pack.description.modResources": "Recursos do mod.",
+  "pack.name.fabricMod": "Mod do AsyncFabric \"%s\"",
+  "pack.name.fabricMod.subPack": "Mod do AsyncFabric \"%s\" (%s)",
+  "pack.source.builtinMod": "integrado: %s",
+  "pack.source.fabricmod": "Mod do Fabric"
+}

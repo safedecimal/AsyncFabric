@@ -1,0 +1,26 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+loom {
+	accessWidenerPath = file("src/main/resources/asyncfabric-gametest-api-v1.classtweaker")
+
+	runs {
+		testmodClient {
+			client()
+			displayName = "Testmod Client"
+			systemProperties.put("fabric-api.gametest.structures.output-dir", "${file("src/testmod/resources/data/asyncfabric-gametest-api-v1-testmod/gametest/structure")}")
+
+			generateRunConfig = false
+			sourceSet = sourceSets.testmodClient.name
+		}
+	}
+}
+
+fabricApiModule {
+	moduleDependencies(
+		'asyncfabric-api-base',
+		'asyncfabric-registry-sync-v0',
+		'asyncfabric-resource-loader-v1',
+	)
+}

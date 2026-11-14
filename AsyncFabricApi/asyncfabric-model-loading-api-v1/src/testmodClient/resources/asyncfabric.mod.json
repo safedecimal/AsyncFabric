@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-model-loading-api-v1-testmod",
+  "name": "AsyncFabric Model Loading API (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "client",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-model-loading-api-v1": "*",
+    "asyncfabric-resource-loader-v1": "*"
+  },
+  "entrypoints": {
+    "client": [
+      "net.asyncfabric.test.model.loading.ModelTestModClient",
+      "net.asyncfabric.test.model.loading.PreparablePluginTest",
+      "net.asyncfabric.test.model.loading.UnbakedModelDeserializerTest"
+    ]
+  }
+}

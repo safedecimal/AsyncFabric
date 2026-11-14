@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-sound-api-v1",
+  "name": "AsyncFabric Sound API (v1)",
+  "version": "${version}",
+  "environment": "client",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-sound-api-v1/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "minecraft": ">=1.19.2"
+  },
+  "description": "Hooks for modifying Minecraft's sound system.",
+  "mixins": [
+    {
+      "config": "asyncfabric-sound-api-v1.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "accessWidener": "asyncfabric-sound-api-v1.classtweaker",
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  }
+}

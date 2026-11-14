@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-events-interaction-v0-testmod",
+  "name": "AsyncFabric Events Interaction (v0) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-events-interaction-v0": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.event.interaction.AttackBlockTests",
+      "net.asyncfabric.test.event.interaction.PlayerBreakBlockTests",
+      "net.asyncfabric.test.event.interaction.PlayerPickItemTests",
+      "net.asyncfabric.test.event.interaction.UseBlockTests",
+      "net.asyncfabric.test.event.interaction.UseEntityTests",
+      "net.asyncfabric.test.event.interaction.UseItemTests"
+    ],
+    "fabric-gametest": [
+      "net.asyncfabric.test.event.interaction.FakePlayerTests"
+    ],
+    "client": [
+      "net.asyncfabric.test.client.event.interaction.ClientPreAttackTests",
+      "net.asyncfabric.test.client.event.interaction.ClientPlayerBlockBreakTests"
+    ],
+    "fabric-client-gametest": [
+	    "net.asyncfabric.test.client.event.interaction.ClientHotbarScrollEventsTests"
+    ]
+  }
+}

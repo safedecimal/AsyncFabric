@@ -1,0 +1,22 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+fabricApiModule {
+	moduleDependencies(
+		'asyncfabric-api-base',
+		'asyncfabric-registry-sync-v0',
+		'asyncfabric-resource-loader-v1',
+		'asyncfabric-transitive-access-wideners-v1'
+	)
+
+	testDependencies(
+		':asyncfabric-command-api-v2',
+		':asyncfabric-lifecycle-events-v1',
+		':asyncfabric-rendering-v1'
+	)
+}
+
+loom {
+	accessWidenerPath = file("src/main/resources/asyncfabric-object-builder-api-v1.classtweaker")
+}

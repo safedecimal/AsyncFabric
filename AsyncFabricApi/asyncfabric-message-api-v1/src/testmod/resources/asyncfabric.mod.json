@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-message-api-v1-testmod",
+  "name": "AsyncFabric Message API (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-message-api-v1": "*",
+    "asyncfabric-command-api-v2": "*",
+    "asyncfabric-events-interaction-v0": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.message.ChatTest"
+    ],
+    "fabric-gametest": [
+      "net.asyncfabric.test.message.ChatGameTest"
+    ],
+    "client": [
+      "net.asyncfabric.test.message.client.ChatTestClient"
+    ]
+  }
+}

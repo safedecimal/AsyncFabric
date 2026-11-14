@@ -1,0 +1,21 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+fabricApiModule {
+	moduleDependencies(
+		'asyncfabric-api-base',
+		'asyncfabric-renderer-api-v1'
+	)
+
+	testDependencies(
+		':asyncfabric-renderer-api-v1',
+		':asyncfabric-renderer-indigo',
+		':asyncfabric-rendering-v1',
+		':asyncfabric-resource-loader-v1'
+	)
+}
+
+loom {
+	accessWidenerPath = file('src/client/resources/asyncfabric-model-loading-api-v1.classtweaker')
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-lifecycle-events-v1-testmod",
+  "name": "AsyncFabric Lifecycle Events (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-lifecycle-events-v1": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.event.lifecycle.CommonLifecycleTests",
+      "net.asyncfabric.test.event.lifecycle.ServerBlockEntityLifecycleTests",
+      "net.asyncfabric.test.event.lifecycle.ServerChunkLifecycleTests",
+      "net.asyncfabric.test.event.lifecycle.ServerEntityLifecycleTests",
+      "net.asyncfabric.test.event.lifecycle.ServerLifecycleTests",
+      "net.asyncfabric.test.event.lifecycle.ServerTickTests",
+      "net.asyncfabric.test.event.lifecycle.ServerResourceReloadTests"
+    ],
+    "client": [
+      "net.asyncfabric.test.event.lifecycle.client.ClientBlockEntityLifecycleTests",
+      "net.asyncfabric.test.event.lifecycle.client.ClientEntityLifecycleTests",
+      "net.asyncfabric.test.event.lifecycle.client.ClientLifecycleTests",
+      "net.asyncfabric.test.event.lifecycle.client.ClientTickTests"
+    ]
+  }
+}

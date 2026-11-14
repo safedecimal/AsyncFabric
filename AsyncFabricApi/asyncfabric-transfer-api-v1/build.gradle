@@ -1,0 +1,20 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+fabricApiModule {
+	moduleDependencies(
+		'asyncfabric-api-base',
+		'asyncfabric-api-lookup-api-v1',
+		'asyncfabric-lifecycle-events-v1',
+		// transitive dependency of API Lookup
+		'asyncfabric-rendering-fluids-v1',
+	)
+
+	testDependencies(
+		':asyncfabric-object-builder-api-v1',
+		':asyncfabric-rendering-v1',
+		':asyncfabric-resource-loader-v1',
+		':asyncfabric-command-api-v2'
+	)
+}

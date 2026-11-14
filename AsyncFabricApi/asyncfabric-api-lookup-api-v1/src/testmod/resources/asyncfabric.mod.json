@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-api-lookup-api-v1-testmod",
+  "name": "AsyncFabric API Lookup API (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-api-lookup-api-v1": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.lookup.FabricApiLookupTest"
+    ],
+    "client": [
+      "net.asyncfabric.test.lookup.client.FabricApiLookupTestClient"
+    ]
+  }
+}

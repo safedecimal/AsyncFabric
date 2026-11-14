@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-debug-api-v1-testmod",
+  "name": "AsyncFabric Debug API (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.debug.DebugApiTest"
+    ],
+    "client": [
+      "net.asyncfabric.test.debug.client.DebugApiTestClient"
+    ],
+    "fabric-client-gametest": [
+    ]
+  }
+}

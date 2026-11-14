@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-data-generation-api-v1",
+  "name": "AsyncFabric Data Generation API (v1)",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-data-generation-api-v1/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-convention-tags-v2": "*",
+    "asyncfabric-recipe-api-v1": "*",
+    "asyncfabric-registry-sync-v0": "*",
+    "asyncfabric-resource-conditions-api-v1": "*",
+    "asyncfabric-tag-api-v1": "*"
+  },
+  "description": "Allows for automatic data generation.",
+  "mixins": [
+    "asyncfabric-data-generation-api-v1.mixins.json",
+    {
+      "config": "asyncfabric-data-generation-api-v1.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "accessWidener" : "asyncfabric-data-generation-api-v1.classtweaker",
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  }
+}

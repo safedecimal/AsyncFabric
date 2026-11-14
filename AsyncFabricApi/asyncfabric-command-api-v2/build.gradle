@@ -1,0 +1,17 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+fabricApiModule {
+	moduleDependencies(
+		'asyncfabric-api-base'
+	)
+
+	testDependencies(
+		':asyncfabric-lifecycle-events-v1',
+	)
+}
+
+loom {
+	accessWidenerPath = file('src/main/resources/asyncfabric-command-api-v2.classtweaker')
+}

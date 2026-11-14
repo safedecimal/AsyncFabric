@@ -1,0 +1,14 @@
+plugins {
+	id 'asyncfabric-api.module'
+	id 'asyncfabric-api.mixin-config'
+}
+
+loom {
+	accessWidenerPath = file('src/client/resources/asyncfabric-client-gametest-api-v1.classtweaker')
+}
+
+fabricApiModule {
+	moduleDependencies(
+		':asyncfabric-networking-api-v1'
+	)
+}

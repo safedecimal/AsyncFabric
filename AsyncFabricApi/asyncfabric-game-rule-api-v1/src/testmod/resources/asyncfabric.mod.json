@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-game-rule-api-v1-testmod",
+  "name": "AsyncFabric Game Rule API (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-game-rule-api-v1": "*",
+    "asyncfabric-lifecycle-events-v1":"*",
+    "asyncfabric-resource-loader-v1": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.gamerule.GameRulesTestMod"
+    ],
+    "fabric-gametest": [
+      "net.asyncfabric.test.gamerule.GameRuleChangeCallbackGameTest"
+    ]
+  }
+}

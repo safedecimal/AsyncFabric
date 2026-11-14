@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-biome-api-v1",
+  "name": "AsyncFabric Biome API (v1)",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-biome-api-v1/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-registry-sync-v0": "*",
+    "minecraft": ">=1.16.2"
+  },
+  "description": "Hooks for adding biomes to the default world generator.",
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.impl.biome.modification.data.BiomeModifiersImpl"
+    ]
+  },
+  "mixins": [
+    "asyncfabric-biome-api-v1.mixins.json"
+  ],
+  "accessWidener" : "asyncfabric-biome-api-v1.classtweaker",
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  }
+}

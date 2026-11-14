@@ -1,0 +1,25 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+loom {
+	accessWidenerPath = file('src/main/resources/asyncfabric-data-attachment-api-v1.classtweaker')
+}
+
+fabricApiModule {
+	moduleDependencies(
+		'asyncfabric-api-base',
+		':asyncfabric-entity-events-v1',
+		':asyncfabric-object-builder-api-v1',
+		':asyncfabric-networking-api-v1'
+	)
+
+	testDependencies(
+		':asyncfabric-lifecycle-events-v1',
+		':asyncfabric-biome-api-v1',
+		':asyncfabric-command-api-v2',
+		':asyncfabric-rendering-v1',
+		':asyncfabric-client-gametest-api-v1',
+		':asyncfabric-events-interaction-v0',
+	)
+}

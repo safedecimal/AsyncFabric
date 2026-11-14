@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-resource-loader-v1-testmod",
+  "name": "AsyncFabric Resource Loader (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-resource-loader-v1": "*",
+    "asyncfabric-resource-loader-v1-testmod-a": "*",
+    "asyncfabric-resource-loader-v1-testmod-b": "*",
+    "asyncfabric-resource-loader-v1-testmod-c": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.resource.loader.BuiltinPackTestMod",
+      "net.asyncfabric.test.resource.loader.ResourceReloaderTestMod",
+      "net.asyncfabric.test.resource.loader.VanillaBuiltinPackInjectionTestMod"
+    ],
+    "server": [
+      "net.asyncfabric.test.resource.loader.LanguageTestMod"
+    ],
+    "fabric-gametest": [
+      "net.asyncfabric.test.resource.loader.BuiltinPackSortingTest"
+    ]
+  },
+  "mixins": [
+    "asyncfabric-resource-loader-v1-testmod.mixins.json"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "asyncfabric-registry-sync-v0.unknown-remote.title.singular": "Бу клиентка билгесез реестр язмасы алынды.\n",
+  "asyncfabric-registry-sync-v0.unknown-remote.title.plural": "Бу клиентка билгесез %d реестр язмасы алынды.\n",
+  "asyncfabric-registry-sync-v0.unknown-remote.subtitle.1": "Гадәттә, бу клиент һәм сервер якларының модлар җыелмаларының туры килмәве аркасында килеп чыга.",
+  "asyncfabric-registry-sync-v0.unknown-remote.subtitle.2": " Күбрәк мәгълүмат өчен клиент журналын карагыз.\nКүрсәтелгән реестр язмалары бәйләнеше бар:",
+  "asyncfabric-registry-sync-v0.unknown-remote.footer": "Һәм тагы %d..."
+}

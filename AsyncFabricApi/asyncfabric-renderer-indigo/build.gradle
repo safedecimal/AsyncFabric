@@ -1,0 +1,16 @@
+plugins {
+	id 'asyncfabric-api.module'
+	id 'asyncfabric-api.mixin-config'
+}
+
+loom {
+	accessWidenerPath = file("src/client/resources/asyncfabric-renderer-indigo.classtweaker")
+}
+
+fabricApiModule {
+	moduleDependencies(
+		'asyncfabric-api-base',
+		'asyncfabric-renderer-api-v1',
+		'asyncfabric-rendering-v1'
+	)
+}

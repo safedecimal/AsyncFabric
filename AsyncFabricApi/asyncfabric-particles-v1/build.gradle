@@ -1,0 +1,25 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+loom {
+	accessWidenerPath = file("src/main/resources/asyncfabric-particles-v1.classtweaker")
+}
+
+fabricApiModule {
+	moduleDependencies(
+		'asyncfabric-api-base',
+		'asyncfabric-networking-api-v1'
+	)
+
+	testDependencies(
+		':asyncfabric-command-api-v2',
+		':asyncfabric-rendering-v1',
+		':asyncfabric-resource-loader-v1'
+	)
+}
+
+validateMixinNames {
+	// Loom needs to handle inner mixins better
+	exclude "**/ParticleManagerAccessor\$SimpleSpriteProviderAccessor.class"
+}

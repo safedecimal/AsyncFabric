@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-debug-api-v1",
+  "name": "AsyncFabric Debug API (v1)",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-debug-api-v1/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-api-base": "*",
+    "asyncfabric-registry-sync-v0": "*"
+  },
+  "description": "A toolkit for registering and using debug subscriptions and other debug tools Mojang have created.",
+  "mixins": [
+    "asyncfabric-debug-api-v1.mixins.json",
+    {
+      "config": "asyncfabric-debug-api-v1.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "accessWidener" : "asyncfabric-debug-api-v1.accesswidener",
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  }
+}

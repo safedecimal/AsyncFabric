@@ -1,0 +1,8 @@
+{
+  "commands.datapack.fabric.internal": "Δεν είναι δυνατή η ενεργοποίηση ή απενεργοποίηση του εσωτερικού πακέτου AsyncFabric \"%s\".",
+  "pack.description.modResources": "Πόροι Mod.",
+  "pack.name.fabricMod": "AsyncFabric Mod \"%s\"",
+  "pack.name.fabricMod.subPack": "AsyncFabric Mod \"%s\" (%s)",
+  "pack.source.builtinMod": "ενσωματωμένα: %s",
+  "pack.source.fabricmod": "AsyncFabric mod"
+}

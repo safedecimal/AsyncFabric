@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-gametest-api-v1",
+  "name": "AsyncFabric Game Test API (v1)",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-gametest-api-v1/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "entrypoints": {
+    "main" : [
+      "net.asyncfabric.impl.gametest.FabricGameTestModInitializer"
+    ]
+  },
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-registry-sync-v0": "*",
+    "asyncfabric-resource-loader-v1": "*"
+  },
+  "description": "Allows registration of custom game tests.",
+  "mixins": [
+    "asyncfabric-gametest-api-v1.mixins.json"
+  ],
+  "accessWidener": "asyncfabric-gametest-api-v1.classtweaker",
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  }
+}

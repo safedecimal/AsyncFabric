@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "fabric:type": "asyncfabric-renderer-api-v1-testmod:pillar"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+import net.asyncfabric.impl.build.FabricApiBuildUtils
+
+plugins {
+	id "maven-publish"
+	id "me.modmuss50.remotesign"
+}
+
+group = "net.asyncfabric.asyncfabric-api"
+
+tasks.withType(GenerateModuleMetadata).configureEach {
+	enabled = false
+}
+
+remoteSign {
+	requestUrl = providers.environmentVariable("SIGNING_SERVER")
+	pgpAuthKey = providers.environmentVariable("SIGNING_PGP_KEY")
+	jarAuthKey = providers.environmentVariable("SIGNING_JAR_KEY")
+	useDummyForTesting = !providers.environmentVariable("SIGNING_SERVER").present
+}
+
+publishing {
+	FabricApiBuildUtils.setupRepositories(project, repositories)
+}

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-networking-api-v1-testmod",
+  "name": "AsyncFabric Networking API (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-networking-api-v1": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.networking.brokenpayloads.BrokenPayloadsTest",
+      "net.asyncfabric.test.networking.channeltest.NetworkingChannelTest",
+      "net.asyncfabric.test.networking.common.NetworkingCommonTest",
+      "net.asyncfabric.test.networking.configuration.NetworkingConfigurationTest",
+      "net.asyncfabric.test.networking.context.PacketContextTest",
+      "net.asyncfabric.test.networking.keybindreciever.NetworkingKeybindPacketTest",
+      "net.asyncfabric.test.networking.login.NetworkingLoginQueryTest",
+      "net.asyncfabric.test.networking.play.NetworkingPlayPacketTest",
+      "net.asyncfabric.test.networking.splitter.NetworkingSplitterTest"
+    ],
+    "client": [
+      "net.asyncfabric.test.networking.client.brokenpayloads.BrokenPayloadsClientTest",
+      "net.asyncfabric.test.networking.client.channeltest.NetworkingChannelClientTest",
+      "net.asyncfabric.test.networking.client.common.NetworkingCommonClientTest",
+      "net.asyncfabric.test.networking.client.configuration.NetworkingConfigurationClientTest",
+      "net.asyncfabric.test.networking.client.context.PacketContextClientTest",
+      "net.asyncfabric.test.networking.client.DisconnectScreenTest",
+      "net.asyncfabric.test.networking.client.keybindreciever.NetworkingKeybindClientPacketTest",
+      "net.asyncfabric.test.networking.client.login.NetworkingLoginQueryClientTest",
+      "net.asyncfabric.test.networking.client.play.NetworkingPlayPacketClientTest",
+      "net.asyncfabric.test.networking.client.splitter.NetworkingSplitterClientTest"
+    ]
+  }
+}

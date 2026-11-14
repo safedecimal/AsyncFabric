@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "asyncfabric-rendering-v1-testmod:item/double_iron_ingot"
+  }
+}

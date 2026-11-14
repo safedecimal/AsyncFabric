@@ -1,0 +1,76 @@
+pluginManagement {
+	repositories {
+		maven {
+			name = 'Fabric'
+			url = 'https://maven.fabricmc.net/'
+		}
+		gradlePluginPortal()
+	}
+}
+
+rootProject.name = "asyncfabric-api"
+
+includeBuild 'build-logic'
+
+include 'asyncfabric-api-bom'
+include 'asyncfabric-api-catalog'
+
+def focus = new File('focus.txt')
+
+if (focus.exists()) {
+	focus.eachLine {
+		include it
+	}
+
+	return // Skip the rest of the includes
+}
+
+include 'asyncfabric-api-base'
+include 'asyncfabric-async-api-v1'
+
+include 'asyncfabric-advancement-api-v1'
+include 'asyncfabric-api-lookup-api-v1'
+include 'asyncfabric-biome-api-v1'
+include 'asyncfabric-block-api-v1'
+include 'asyncfabric-block-getter-api-v2'
+include 'asyncfabric-client-gametest-api-v1'
+include 'asyncfabric-command-api-v2'
+include 'asyncfabric-content-registries-v0'
+include 'asyncfabric-convention-tags-v2'
+include 'asyncfabric-crash-report-info-v1'
+include 'asyncfabric-creative-tab-api-v1'
+include 'asyncfabric-data-attachment-api-v1'
+include 'asyncfabric-data-generation-api-v1'
+include 'asyncfabric-debug-api-v1'
+include 'asyncfabric-dimensions-v1'
+include 'asyncfabric-entity-events-v1'
+include 'asyncfabric-events-interaction-v0'
+include 'asyncfabric-game-rule-api-v1'
+include 'asyncfabric-gametest-api-v1'
+include 'asyncfabric-item-api-v1'
+include 'asyncfabric-key-mapping-api-v1'
+include 'asyncfabric-lifecycle-events-v1'
+include 'asyncfabric-loot-api-v3'
+include 'asyncfabric-menu-api-v1'
+include 'asyncfabric-message-api-v1'
+include 'asyncfabric-model-loading-api-v1'
+include 'asyncfabric-networking-api-v1'
+include 'asyncfabric-object-builder-api-v1'
+include 'asyncfabric-particles-v1'
+include 'asyncfabric-permission-api-v1'
+include 'asyncfabric-recipe-api-v1'
+include 'asyncfabric-registry-sync-v0'
+include 'asyncfabric-renderer-api-v1'
+include 'asyncfabric-renderer-indigo'
+include 'asyncfabric-rendering-fluids-v1'
+include 'asyncfabric-rendering-v1'
+include 'asyncfabric-resource-conditions-api-v1'
+include 'asyncfabric-resource-loader-v1'
+include 'asyncfabric-screen-api-v1'
+include 'asyncfabric-serialization-api-v1'
+include 'asyncfabric-sound-api-v1'
+include 'asyncfabric-tag-api-v1'
+include 'asyncfabric-transfer-api-v1'
+include 'asyncfabric-transitive-access-wideners-v1'
+include 'deprecated'
+include 'deprecated:asyncfabric-resource-loader-v0'

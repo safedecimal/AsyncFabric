@@ -1,0 +1,8 @@
+{
+  "commands.datapack.fabric.internal": "Nelze zapnout ani vypnout zabudováný balíček Fabricu \"%s\".",
+  "pack.description.modResources": "Modové zdroje.",
+  "pack.name.fabricMod": "AsyncFabric Mod \"%s\"",
+  "pack.name.fabricMod.subPack": "AsyncFabric Mod \"%s\" (%s)",
+  "pack.source.builtinMod": "zabudováný: %s",
+  "pack.source.fabricmod": "AsyncFabric Mod"
+}

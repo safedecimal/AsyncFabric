@@ -1,0 +1,5 @@
+{
+  "key.asyncfabric-networking-api-v1-testmod.open": "Open channel tester",
+  "key.asyncfabric-networking-api-v1-testmod.test": "Send test packet",
+  "key.category.asyncfabric-networking-api-v1-testmod": "AsyncFabric Network Test"
+}

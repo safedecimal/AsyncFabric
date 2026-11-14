@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-transitive-access-wideners-v1-testmod",
+  "name": "AsyncFabric Transitive Access Wideners (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-transitive-access-wideners-v1": "*",
+    "asyncfabric-object-builder-api-v1": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.access.SignBlockEntityTest"
+    ],
+    "client": [
+      "net.asyncfabric.test.access.client.BlockEntityRendererTest"
+    ]
+  }
+}

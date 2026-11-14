@@ -1,0 +1,7 @@
+{
+  "asyncfabric-registry-sync-v0.unknown-remote.title.singular": "Entrada de registro recebida desconhecida pelo cliente.",
+  "asyncfabric-registry-sync-v0.unknown-remote.title.plural": "%d entradas de registro recebidas desconhecidas pelo cliente.",
+  "asyncfabric-registry-sync-v0.unknown-remote.subtitle.1": "A causa é uma incompatibilidade entre os mods do cliente e servidor.",
+  "asyncfabric-registry-sync-v0.unknown-remote.subtitle.2": " Veja os logs do cliente para saber mais.\nOs seguintes namespaces de entrada do registro podem estar relacionados:\n\n",
+  "asyncfabric-registry-sync-v0.unknown-remote.footer": "E mais %d..."
+}

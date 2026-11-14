@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-events-interaction-v0",
+  "name": "AsyncFabric Events Interaction (v0)",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-events-interaction-v0/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-api-base": "*",
+    "asyncfabric-networking-api-v1": "*",
+    "minecraft": ">=1.15-alpha.19.37.a"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.impl.event.interaction.InteractionEventsRouter"
+    ]
+  },
+  "description": "Events for player interaction with blocks and entities.",
+  "mixins": [
+    "asyncfabric-events-interaction-v0.mixins.json",
+    {
+      "config": "asyncfabric-events-interaction-v0.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  }
+}

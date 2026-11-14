@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-renderer-api-v1-testmod",
+  "name": "AsyncFabric Renderer API (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-resource-loader-v1": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.renderer.RendererTest"
+    ],
+    "client": [
+      "net.asyncfabric.test.renderer.client.RendererClientTest"
+    ]
+  }
+}

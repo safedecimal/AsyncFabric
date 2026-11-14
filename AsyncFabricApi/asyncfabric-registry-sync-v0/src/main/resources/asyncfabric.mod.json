@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-registry-sync-v0",
+  "name": "AsyncFabric Registry Sync (v0)",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-registry-sync-v0/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-api-base": "*",
+    "asyncfabric-networking-api-v1": "*"
+  },
+  "description": "Syncs registry mappings.",
+  "mixins": [
+    "asyncfabric-registry-sync-v0.mixins.json",
+    {
+      "config": "asyncfabric-registry-sync-v0.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.impl.registry.sync.FabricRegistryInit"
+    ],
+    "client": [
+      "net.asyncfabric.impl.client.registry.sync.FabricRegistryClientInit"
+    ]
+  },
+  "accessWidener": "asyncfabric-registry-sync-v0.classtweaker",
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  }
+}

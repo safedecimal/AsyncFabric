@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-key-mapping-api-v1-testmod",
+  "name": "AsyncFabric Key Mapping API (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-api-base": "*",
+    "asyncfabric-lifecycle-events-v1": "*",
+    "asyncfabric-key-mapping-api-v1": "*"
+  },
+  "entrypoints": {
+    "client": [
+      "net.asyncfabric.test.client.keymapping.KeyMappingsTest"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-resource-conditions-api-v1-testmod",
+  "name": "AsyncFabric Resource Conditions API (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-resource-conditions-api-v1": "*"
+  },
+  "entrypoints": {
+    "fabric-gametest": [
+      "net.asyncfabric.test.resource.conditions.ConditionalResourcesTest",
+      "net.asyncfabric.test.resource.conditions.DefaultResourceConditionsTest"
+    ]
+  }
+}

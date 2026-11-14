@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-command-api-v2-testmod",
+  "name": "AsyncFabric Command API (v2) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-command-api-v2": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.command.CommandTest",
+      "net.asyncfabric.test.command.CustomArgumentTest"
+    ],
+    "client": [
+      "net.asyncfabric.test.command.client.ClientCommandTest"
+    ],
+    "fabric-gametest": [
+      "net.asyncfabric.test.command.EntitySelectorGameTest"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+fabricApiModule {
+	moduleDependencies(
+		'asyncfabric-api-base',
+		'asyncfabric-resource-loader-v1'
+	)
+}
+
+loom {
+	accessWidenerPath = file('src/main/resources/asyncfabric-creative-tab-api-v1.classtweaker')
+}

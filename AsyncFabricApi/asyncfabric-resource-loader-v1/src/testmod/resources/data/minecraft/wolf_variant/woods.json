@@ -1,0 +1,21 @@
+{
+  "assets": {
+    "angry": "asyncfabric-resource-loader-v1-testmod:entity/wolf/green",
+    "tame": "asyncfabric-resource-loader-v1-testmod:entity/wolf/green",
+    "wild": "asyncfabric-resource-loader-v1-testmod:entity/wolf/green"
+  },
+  "baby_assets": {
+    "angry": "asyncfabric-resource-loader-v1-testmod:entity/wolf/green",
+    "tame": "asyncfabric-resource-loader-v1-testmod:entity/wolf/green",
+    "wild": "asyncfabric-resource-loader-v1-testmod:entity/wolf/green"
+  },
+  "spawn_conditions": [
+    {
+      "condition": {
+        "type": "minecraft:biome",
+        "biomes": "minecraft:forest"
+      },
+      "priority": 1
+    }
+  ]
+}

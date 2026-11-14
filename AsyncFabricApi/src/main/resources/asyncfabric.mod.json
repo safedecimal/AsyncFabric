@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-api",
+  "name": "AsyncFabric API",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric/icon.png",
+  "contact": {
+    "homepage": "https://github.com/AsyncFabric/AsyncFabricApi",
+    "issues": "https://github.com/AsyncFabric/AsyncFabricApi/issues",
+    "sources": "https://github.com/AsyncFabric/AsyncFabricApi"
+  },
+  "authors": [
+    "AsyncFabric",
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "java": ">=25",
+    "minecraft": "~26.3-"
+  },
+  "description": "AsyncFabric fork of Fabric API."
+}

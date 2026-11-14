@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-screen-api-v1",
+  "name": "AsyncFabric Screen API (v1)",
+  "version": "${version}",
+  "environment": "client",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-screen-api-v1/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-api-base": "*"
+  },
+  "description": "Adds screen related hooks.",
+  "mixins": [
+    "asyncfabric-screen-api-v1.mixins.json"
+  ],
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  }
+}

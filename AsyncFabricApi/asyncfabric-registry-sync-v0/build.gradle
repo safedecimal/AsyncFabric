@@ -1,0 +1,20 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+loom {
+	accessWidenerPath = file("src/main/resources/asyncfabric-registry-sync-v0.classtweaker")
+}
+
+fabricApiModule {
+	moduleDependencies(
+		'asyncfabric-api-base',
+		'asyncfabric-networking-api-v1'
+	)
+
+	testDependencies(
+		':asyncfabric-lifecycle-events-v1',
+		':asyncfabric-command-api-v2',
+		':asyncfabric-client-gametest-api-v1'
+	)
+}

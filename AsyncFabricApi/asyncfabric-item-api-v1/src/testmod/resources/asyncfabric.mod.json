@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-item-api-v1-testmod",
+  "name": "AsyncFabric Item API (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-item-api-v1": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.item.ComponentTooltipProviderTest",
+      "net.asyncfabric.test.item.CreatorNamespaceTest",
+      "net.asyncfabric.test.item.CustomBlockTransformsTest",
+      "net.asyncfabric.test.item.CustomDamageTest",
+      "net.asyncfabric.test.item.CustomEnchantmentEffectsTest",
+      "net.asyncfabric.test.item.CustomModelIdTest",
+      "net.asyncfabric.test.item.DefaultItemComponentTest",
+      "net.asyncfabric.test.item.CustomItemTests",
+      "net.asyncfabric.test.item.ItemClickBehaviorTest",
+      "net.asyncfabric.test.item.ItemUpdateAnimationTest",
+      "net.asyncfabric.test.item.ModifyComponentsInPropertiesTestSetup"
+    ],
+    "client": [
+      "net.asyncfabric.test.item.client.TooltipTests"
+    ],
+    "fabric-gametest" : [
+      "net.asyncfabric.test.item.gametest.BrewingStandGameTest",
+      "net.asyncfabric.test.item.gametest.CustomBlockTransformsGameTest",
+      "net.asyncfabric.test.item.gametest.CustomDamageGameTest",
+      "net.asyncfabric.test.item.gametest.CustomEnchantmentEffectsGameTest",
+      "net.asyncfabric.test.item.gametest.DefaultItemComponentGameTest",
+      "net.asyncfabric.test.item.gametest.FurnaceGameTest",
+      "net.asyncfabric.test.item.gametest.RecipeGameTest"
+    ]
+  }
+}

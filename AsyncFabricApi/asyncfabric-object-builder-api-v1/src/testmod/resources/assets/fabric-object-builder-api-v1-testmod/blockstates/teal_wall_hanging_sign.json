@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "asyncfabric-object-builder-api-v1-testmod:block/teal_wall_hanging_sign",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "asyncfabric-object-builder-api-v1-testmod:block/teal_wall_hanging_sign",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "asyncfabric-object-builder-api-v1-testmod:block/teal_wall_hanging_sign"
+    },
+    "facing=west": {
+      "model": "asyncfabric-object-builder-api-v1-testmod:block/teal_wall_hanging_sign",
+      "y": 90
+    }
+  }
+}

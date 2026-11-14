@@ -1,0 +1,233 @@
+/*
+ * Copyright (c) 2016, 2017, 2018, 2019 FabricMC
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package net.asyncfabric.impl.networking.splitter;
+
+import java.util.List;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.DecoderException;
+import io.netty.handler.codec.MessageToMessageDecoder;
+import org.jspecify.annotations.Nullable;
+
+import net.minecraft.network.PacketDecoder;
+import net.minecraft.network.VarInt;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.PacketType;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.Identifier;
+
+import net.asyncfabric.api.networking.v1.context.PacketContext;
+import net.asyncfabric.impl.networking.GenericPayloadAccessor;
+import net.asyncfabric.impl.networking.PayloadTypeRegistryImpl;
+import net.asyncfabric.impl.networking.VanillaPacketTypes;
+import net.asyncfabric.mixin.networking.accessor.PacketDecoderAccessor;
+
+public class FabricPacketMerger extends MessageToMessageDecoder<Packet<?>> {
+	private final PacketDecoder<?> packetDecoder;
+	private final PayloadTypeRegistryImpl<?> payloadTypeRegistry;
+	private final VanillaPacketTypes vanillaPacketTypes;
+	private final PacketContext context;
+	@Nullable
+	private Merger packetMerger;
+
+	public FabricPacketMerger(PacketContext context, PacketDecoder<?> packetDecoder, PayloadTypeRegistryImpl<?> payloadTypeRegistry, VanillaPacketTypes vanillaPacketTypes) {
+		this.context = context;
+		this.packetDecoder = packetDecoder;
+		this.payloadTypeRegistry = payloadTypeRegistry;
+		this.vanillaPacketTypes = vanillaPacketTypes;
+	}
+
+	protected void decode(ChannelHandlerContext channelHandlerContext, Packet<?> packet, List<Object> list) throws Exception {
+		FabricSplitPacketPayload splitPayload = packet instanceof GenericPayloadAccessor accessor && accessor.fabric_payload() instanceof FabricSplitPacketPayload payload ? payload : null;
+
+		try {
+			decodePacket(channelHandlerContext, packet, list);
+		} catch (Exception ex) {
+			clearMerger();
+			throw ex;
+		} finally {
+			if (splitPayload != null) {
+				splitPayload.byteBuf().release();
+			}
+		}
+	}
+
+	private void decodePacket(ChannelHandlerContext channelHandlerContext, Packet<?> packet, List<Object> list) throws Exception {
+		if (this.packetMerger != null) {
+			ensureNotTransitioning(packet);
+
+			CustomPacketPayload payload = packet instanceof GenericPayloadAccessor accessor ? accessor.fabric_payload() : null;
+
+			if (payload == null) {
+				throw new DecoderException("Received '" + packet.type().id() + "' packet, while expecting 'minecraft:custom_payload'!");
+			}
+
+			if (!(payload instanceof FabricSplitPacketPayload splitPacketPayload)) {
+				throw new DecoderException("Expected '" + FabricSplitPacketPayload.TYPE.id() +"' payload packet, but received '" + payload.type().id() + "'!");
+			}
+
+			if (this.packetMerger.add(channelHandlerContext, splitPacketPayload, list)) {
+				clearMerger();
+			}
+		} else if (packet instanceof GenericPayloadAccessor accessor && accessor.fabric_payload() instanceof FabricSplitPacketPayload payload) {
+			ensureNotTransitioning(packet);
+			ByteBuf buf = payload.byteBuf();
+			int packetSize = VarInt.read(buf);
+			int readerIndex = buf.readerIndex();
+
+			PacketType<?> packetType = this.vanillaPacketTypes.get(VarInt.read(buf));
+
+			if (packetType != packet.type()) {
+				throw new DecoderException("Received unsupported split packet type! Expected '" + packet.type().id() + " got '" + (packetType != null ? packetType.id() : "<NULL>") + "'!");
+			}
+
+			Identifier payloadId = Identifier.STREAM_CODEC.decode(payload.byteBuf());
+
+			buf.readerIndex(readerIndex);
+
+			int maxSize = this.payloadTypeRegistry.getMaxPacketSizeForSplitting(payloadId);
+
+			if (maxSize == -1) {
+				throw new DecoderException("Received '" + payloadId + "' packet doesn't support splitting, but received split data!");
+			} else if (maxSize < packetSize) {
+				throw new DecoderException("Received '" + payloadId + "' packet is larger than max allowed size! Got " + packetSize + " bytes, expected " + maxSize + " bytes!");
+			}
+
+			if (this.payloadTypeRegistry.allowPayloadDecode(payloadId, this.context)) {
+				this.packetMerger = new MergerImpl(this.packetDecoder, payloadId, packetSize);
+			} else {
+				this.packetMerger = new MergerNoOp(payloadId, packetSize);
+			}
+
+			if (this.packetMerger.add(channelHandlerContext, payload, list)) {
+				throw new DecoderException("Received '" + payloadId + "' as a split packet, but it wasn't actually split!");
+			}
+		} else {
+			list.add(packet);
+
+			if (packet.isTerminal()) {
+				channelHandlerContext.pipeline().remove(channelHandlerContext.name());
+			}
+		}
+	}
+
+	@Override
+	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+		clearMerger();
+		super.channelInactive(ctx);
+	}
+
+	@Override
+	public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
+		clearMerger();
+		super.handlerRemoved(ctx);
+	}
+
+	private void clearMerger() {
+		if (this.packetMerger != null) {
+			Merger merger = this.packetMerger;
+			this.packetMerger = null;
+			merger.release();
+		}
+	}
+
+	private static void ensureNotTransitioning(Packet<?> packet) {
+		if (packet.isTerminal()) {
+			throw new DecoderException("Terminal message received in bundle");
+		}
+	}
+
+	private interface Merger {
+		boolean add(ChannelHandlerContext channelHandlerContext, FabricSplitPacketPayload payload, List<Object> objects) throws Exception;
+		void release();
+	}
+
+	private static class MergerNoOp implements Merger {
+		private final int finalSize;
+		private final Identifier packetId;
+		private long accumulatedSize;
+
+		MergerNoOp(Identifier identifier, int finalSize) {
+			this.packetId = identifier;
+			this.finalSize = finalSize;
+		}
+
+		@Override
+		public boolean add(ChannelHandlerContext channelHandlerContext, FabricSplitPacketPayload payload, List<Object> objects) throws Exception {
+			long newSize = this.accumulatedSize + payload.byteBuf().readableBytes();
+
+			if (this.finalSize < newSize) {
+				throw new DecoderException("Received too much data for packet '" + this.packetId + "'! Expected " + this.finalSize + " bytes, received " + newSize + " bytes!");
+			}
+
+			this.accumulatedSize += payload.byteBuf().readableBytes();
+
+			if (this.accumulatedSize == this.finalSize) {
+				return true;
+			}
+
+			return false;
+		}
+
+		@Override
+		public void release() {
+		}
+	}
+
+	private static class MergerImpl implements Merger {
+		// Netty grows buffers above 4 MiB in 4 MiB steps.
+		private static final int MAX_INITIAL_BUFFER_SIZE = 12 * 1024 * 1024;
+
+		private final PacketDecoderAccessor packetDecoder;
+		private final Identifier packetId;
+		private final int finalSize;
+
+		private final ByteBuf byteBuf;
+
+		MergerImpl(PacketDecoder<?> packetDecoder, Identifier identifier, int finalSize) {
+			this.packetDecoder = (PacketDecoderAccessor) packetDecoder;
+			this.packetId = identifier;
+			this.byteBuf = Unpooled.buffer(Math.min(finalSize, MAX_INITIAL_BUFFER_SIZE), finalSize);
+			this.finalSize = finalSize;
+		}
+
+		@Override
+		public boolean add(ChannelHandlerContext channelHandlerContext, FabricSplitPacketPayload payload, List<Object> objects) throws Exception {
+			long newSize = (long) this.byteBuf.readableBytes() + payload.byteBuf().readableBytes();
+
+			if (this.finalSize < newSize) {
+				throw new DecoderException("Received too much data for packet '" + this.packetId + "'! Expected " + this.finalSize + " bytes, received " + newSize + " bytes!");
+			}
+
+			this.byteBuf.writeBytes(payload.byteBuf());
+
+			if (this.byteBuf.readableBytes() == this.finalSize) {
+				this.packetDecoder.fabric_decode(channelHandlerContext, byteBuf, objects);
+				return true;
+			}
+
+			return false;
+		}
+
+		@Override
+		public void release() {
+			this.byteBuf.release();
+		}
+	}
+}

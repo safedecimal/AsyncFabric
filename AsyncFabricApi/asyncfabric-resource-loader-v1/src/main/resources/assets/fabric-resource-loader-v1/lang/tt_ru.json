@@ -1,0 +1,8 @@
+{
+  "commands.datapack.fabric.internal": "«%s» AsyncFabric эчтәге җыелмасын кушып яки сүндереп булмый.",
+  "pack.description.modResources": "Модлар ресурслары.",
+  "pack.name.fabricMod": "«%s» дигән AsyncFabric моды",
+  "pack.name.fabricMod.subPack": "«%s» дигән AsyncFabric моды (%s)",
+  "pack.source.builtinMod": "кертелгән: %s",
+  "pack.source.fabricmod": "AsyncFabric моды белән өстәлгән"
+}

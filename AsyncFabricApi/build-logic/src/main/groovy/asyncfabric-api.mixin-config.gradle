@@ -1,0 +1,28 @@
+import net.asyncfabric.impl.build.FabricApiBuildUtils
+
+plugins {
+	id "asyncfabric-api.module"
+}
+
+sourceSets {
+	mixinConfig {
+		compileClasspath += configurations.loaderLibraries
+	}
+	client {
+		compileClasspath += mixinConfig.output
+		runtimeClasspath += mixinConfig.output
+	}
+}
+
+configurations {
+	clientImplementation.extendsFrom mixinConfigImplementation
+	clientRuntimeOnly.extendsFrom mixinConfigRuntimeOnly
+}
+
+dependencies {
+	mixinConfigImplementation FabricApiBuildUtils.library(project, "asyncfabric-loader")
+}
+
+tasks.named("jar", Jar) {
+	from sourceSets.mixinConfig.output
+}

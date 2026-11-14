@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-async-api-v1",
+  "name": "AsyncFabric Async API (v1)",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "contact": {
+    "homepage": "https://github.com/AsyncFabric/AsyncFabricApi",
+    "issues": "https://github.com/AsyncFabric/AsyncFabricApi/issues",
+    "sources": "https://github.com/AsyncFabric/AsyncFabricApi"
+  },
+  "authors": [
+    "AsyncFabric"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-api-base": "*"
+  },
+  "description": "Asynchronous event bus, scheduler and lifecycle hooks.",
+  "mixins": [
+    "asyncfabric-async-api-v1.mixins.json",
+    {
+      "config": "asyncfabric-async-api-v1.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "custom": {
+    "fabric-api:module-lifecycle": "experimental"
+  }
+}

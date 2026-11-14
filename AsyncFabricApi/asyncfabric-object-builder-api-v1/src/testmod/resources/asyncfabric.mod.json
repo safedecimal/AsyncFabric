@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-object-builder-api-v1-testmod",
+  "name": "AsyncFabric Object Builder API (v1) Test Mod",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-object-builder-api-v1-testmod/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabric-resource-loader-v1": "*",
+    "asyncfabric-object-builder-api-v1": "*"
+  },
+  "description": "Test mod for fabric object builder API v1.",
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.object.builder.BlockEntityTypeBuilderTest",
+      "net.asyncfabric.test.object.builder.TealSignTest",
+      "net.asyncfabric.test.object.builder.DimensionDataStorageTest",
+      "net.asyncfabric.test.object.builder.EntityDataAccessorTest",
+      "net.asyncfabric.test.object.builder.FabricDefaultAttributeRegistryTest"
+    ],
+    "client": [
+      "net.asyncfabric.test.object.builder.client.EntityDataAccessorClientTest"
+    ],
+    "fabric-gametest": [
+      "net.asyncfabric.test.object.builder.ObjectBuilderGameTest",
+      "net.asyncfabric.test.object.builder.FabricDefaultAttributeRegistryGameTest"
+    ]
+  }
+}

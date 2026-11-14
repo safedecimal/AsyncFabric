@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-api-base-testmod",
+  "name": "AsyncFabric API Base Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.base.FabricApiBaseTestInit"
+    ],
+    "server": [
+      "net.asyncfabric.test.base.FabricApiAutoTestServer"
+    ],
+    "fabric-gametest" : [
+      "net.asyncfabric.test.base.FabricApiBaseGameTest"
+    ]
+  }
+}

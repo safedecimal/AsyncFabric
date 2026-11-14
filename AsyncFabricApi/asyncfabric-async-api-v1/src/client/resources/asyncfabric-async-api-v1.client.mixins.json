@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "net.asyncfabric.mixin.async.client",
+  "compatibilityLevel": "JAVA_25",
+  "client": [
+    "MinecraftMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1,
+    "maxShiftBy": 3
+  }
+}

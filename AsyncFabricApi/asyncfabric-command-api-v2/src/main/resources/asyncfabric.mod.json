@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-command-api-v2",
+  "name": "AsyncFabric Command API (v2)",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-command-api-v2/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-api-base": "*",
+    "minecraft": ">1.19-alpha.22.11.a"
+  },
+  "description": "Adds command-related hooks.",
+  "accessWidener": "asyncfabric-command-api-v2.classtweaker",
+  "mixins": [
+    "asyncfabric-command-api-v2.mixins.json",
+    {
+      "config": "asyncfabric-command-api-v2.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  }
+}

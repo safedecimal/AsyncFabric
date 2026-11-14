@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-lifecycle-events-v1",
+  "name": "AsyncFabric Lifecycle Events (v1)",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-lifecycle-events-v1/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.impl.event.lifecycle.LifecycleEventsImpl"
+    ],
+    "client": [
+      "net.asyncfabric.impl.client.event.lifecycle.ClientLifecycleEventsImpl"
+    ]
+  },
+  "mixins": [
+    "asyncfabric-lifecycle-events-v1.mixins.json",
+    {
+      "config": "asyncfabric-lifecycle-events-v1.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-api-base": "*"
+  },
+  "description": "Events for the game's lifecycle.",
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  },
+  "accessWidener": "asyncfabric-lifecycle-events-v1.classtweaker"
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-item-api-v1",
+  "name": "AsyncFabric Item API (v1)",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-item-api-v1/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "mixins": [
+    "asyncfabric-item-api-v1.mixins.json",
+    {
+      "config": "asyncfabric-item-api-v1.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-api-base": "*",
+    "asyncfabric-resource-loader-v1": "*"
+  },
+  "description": "Hooks for items",
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  },
+  "accessWidener": "asyncfabric-item-api-v1.classtweaker"
+}

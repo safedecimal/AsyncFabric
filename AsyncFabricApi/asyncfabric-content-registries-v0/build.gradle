@@ -1,0 +1,12 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+fabricApiModule {
+	moduleDependencies(
+		'asyncfabric-api-base',
+		'asyncfabric-lifecycle-events-v1',
+		'asyncfabric-resource-loader-v1',
+		'asyncfabric-item-api-v1'
+	)
+}

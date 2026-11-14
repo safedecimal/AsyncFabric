@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-data-attachment-api-v1",
+  "name": "AsyncFabric Data Attachment API (v1)",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-data-attachment-api-v1/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-entity-events-v1": "*",
+    "asyncfabric-object-builder-api-v1": "*",
+    "asyncfabric-networking-api-v1": "*"
+  },
+  "description": "Allows conveniently attaching data to existing game objects",
+  "mixins": [
+    "asyncfabric-data-attachment-api-v1.mixins.json",
+    {
+      "config": "asyncfabric-data-attachment-api-v1.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.impl.attachment.AttachmentEntrypoint",
+      "net.asyncfabric.impl.attachment.sync.AttachmentSync"
+    ],
+    "client": [
+      "net.asyncfabric.impl.attachment.client.AttachmentSyncClient"
+    ]
+  },
+  "accessWidener": "asyncfabric-data-attachment-api-v1.classtweaker",
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  }
+}

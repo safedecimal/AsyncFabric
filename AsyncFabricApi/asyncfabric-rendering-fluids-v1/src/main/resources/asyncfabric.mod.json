@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-rendering-fluids-v1",
+  "name": "AsyncFabric Rendering Fluids (v1)",
+  "version": "${version}",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-rendering-fluids-v1/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-api-base": "*"
+  },
+  "description": "Hooks for registering fluid renders.",
+  "mixins": [
+    {
+      "config": "asyncfabric-rendering-fluids-v1.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  },
+  "accessWidener": "asyncfabric-rendering-fluids-v1.classtweaker"
+}

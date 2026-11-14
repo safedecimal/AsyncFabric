@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+  ],
+  "fabric:remove": [
+    "asyncfabric-tag-api-v1-testmod:non_present"
+  ]
+}

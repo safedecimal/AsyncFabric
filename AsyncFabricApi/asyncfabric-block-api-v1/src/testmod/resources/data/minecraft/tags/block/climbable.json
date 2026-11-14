@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "asyncfabric-block-api-v1-testmod:custom_ladder",
+    "asyncfabric-block-api-v1-testmod:custom_non_ladder"
+  ]
+}

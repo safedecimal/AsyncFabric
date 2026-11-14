@@ -1,0 +1,3 @@
+plugins {
+	id 'asyncfabric-api.maven-bom'
+}

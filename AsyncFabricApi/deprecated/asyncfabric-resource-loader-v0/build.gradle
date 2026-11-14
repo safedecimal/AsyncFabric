@@ -1,0 +1,16 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+fabricApiModule {
+	moduleDependencies(
+		'asyncfabric-api-base', 'asyncfabric-resource-loader-v1'
+	)
+
+	testDependencies(
+		':asyncfabric-lifecycle-events-v1',
+		':asyncfabric-api-base',
+		':asyncfabric-gametest-api-v1',
+		':deprecated:asyncfabric-resource-loader-v0'
+	)
+}

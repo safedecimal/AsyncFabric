@@ -1,0 +1,11 @@
+{
+  "asyncfabric-data-attachment-api-v1.unknown-target.attachment-identifier": "Identifikátor přílohy: %s",
+  "asyncfabric-data-attachment-api-v1.unknown-target.block-entity-position": "Pozice blokové entity: %s",
+  "asyncfabric-data-attachment-api-v1.unknown-target.chunk-position": "Pozice chunku: %s",
+  "asyncfabric-data-attachment-api-v1.unknown-target.entity-network-id": "ID sítě entity: %s",
+  "asyncfabric-data-attachment-api-v1.unknown-target.target-type": "Typ zaměření: %s",
+  "asyncfabric-data-attachment-api-v1.unknown-target.target-type.block-entity": "Bloková entita",
+  "asyncfabric-data-attachment-api-v1.unknown-target.target-type.chunk": "Chunk",
+  "asyncfabric-data-attachment-api-v1.unknown-target.target-type.entity": "Entita",
+  "asyncfabric-data-attachment-api-v1.unknown-target.title": "Obdržena změna přílohy pro neznámý cíl!"
+}

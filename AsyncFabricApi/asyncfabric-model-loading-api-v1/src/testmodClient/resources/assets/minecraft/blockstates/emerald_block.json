@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "asyncfabric-model-loading-api-v1-testmod:block/emerald_block"
+    }
+  }
+}

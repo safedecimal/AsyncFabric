@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-data-attachment-api-v1-testmod",
+  "name": "AsyncFabric Data Attachment API (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-data-attachment-api-v1": "*",
+    "asyncfabric-lifecycle-events-v1": "*",
+    "asyncfabric-biome-api-v1": "*",
+    "asyncfabric-command-api-v2": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.attachment.AttachmentTestMod"
+    ],
+    "client": [
+      "net.asyncfabric.test.attachment.client.AttachmentClientTestMod"
+    ],
+    "fabric-gametest": [
+      "net.asyncfabric.test.attachment.gametest.AttachmentCopyTests",
+      "net.asyncfabric.test.attachment.gametest.BlockEntityTests"
+    ],
+    "fabric-client-gametest": [
+      "net.asyncfabric.test.attachment.client.gametest.PersistenceGametest",
+      "net.asyncfabric.test.attachment.client.gametest.SyncGametest"
+    ]
+  },
+  "mixins": [
+    "asyncfabric-data-attachment-api-v1-testmod.mixins.json"
+  ]
+}

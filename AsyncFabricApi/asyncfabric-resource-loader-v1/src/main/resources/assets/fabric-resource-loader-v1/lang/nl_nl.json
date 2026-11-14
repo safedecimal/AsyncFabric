@@ -1,0 +1,8 @@
+{
+  "commands.datapack.fabric.internal": "Kan het interne AsyncFabric datapack \"%s\" niet aan- of uitzetten.",
+  "pack.description.modResources": "Mod bronnen.",
+  "pack.name.fabricMod": "AsyncFabric Mod \"%s\"",
+  "pack.name.fabricMod.subPack": "AsyncFabric Mod \"%s\" (%s)",
+  "pack.source.builtinMod": "ingebouwd: %s",
+  "pack.source.fabricmod": "AsyncFabric mod"
+}

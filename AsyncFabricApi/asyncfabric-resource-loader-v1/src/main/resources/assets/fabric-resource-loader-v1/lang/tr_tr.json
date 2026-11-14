@@ -1,0 +1,8 @@
+{
+  "commands.datapack.fabric.internal": "\"%s\" AsyncFabric iç paketi etkinleştirilemiyor veya devre dışı bırakılamıyor.",
+  "pack.description.modResources": "Mod kaynakları.",
+  "pack.name.fabricMod": "AsyncFabric Modu \"%s\"",
+  "pack.name.fabricMod.subPack": "AsyncFabric Modu \"%s\" (%s)",
+  "pack.source.builtinMod": "dahili: %s",
+  "pack.source.fabricmod": "AsyncFabric modu"
+}

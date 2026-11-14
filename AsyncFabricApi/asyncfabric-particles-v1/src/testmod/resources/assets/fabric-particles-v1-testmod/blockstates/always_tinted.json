@@ -1,0 +1,5 @@
+{
+  "variants": {
+    "": { "model": "asyncfabric-particles-v1-testmod:block/tint_test" }
+  }
+}

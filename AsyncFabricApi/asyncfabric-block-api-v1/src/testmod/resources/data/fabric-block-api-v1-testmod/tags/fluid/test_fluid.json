@@ -1,0 +1,6 @@
+{
+  "values": [
+    "asyncfabric-block-api-v1-testmod:test_fluid",
+    "asyncfabric-block-api-v1-testmod:test_fluid_flowing"
+  ]
+}

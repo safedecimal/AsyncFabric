@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-entity-events-v1-testmod",
+  "name": "AsyncFabric Entity Events (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-entity-events-v1": "*",
+    "asyncfabric-command-api-v2": "*",
+    "asyncfabric-registry-sync-v0": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.entity.event.EntityEventTests"
+    ],
+    "client": [
+      "net.asyncfabric.test.entity.event.client.EntityEventTestsClient"
+    ],
+    "fabric-gametest": [
+      "net.asyncfabric.test.entity.event.gametest.ServerMobEffectsGameTest"
+    ]
+  }
+}

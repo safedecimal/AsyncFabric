@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-loot-api-v3-testmod",
+  "name": "AsyncFabric Loot Table API (v3) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-loot-api-v3": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.loot.LootTest"
+    ],
+    "fabric-gametest": [
+      "net.asyncfabric.test.loot.LootGameTest"
+    ]
+  }
+}

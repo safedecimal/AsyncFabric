@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-particles-v1",
+  "name": "AsyncFabric Particles (v1)",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-particles-v1/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-networking-api-v1": "*"
+  },
+  "entrypoints": {
+    "main": [
+	    "net.asyncfabric.impl.particle.ExtendedBlockParticleOptionSync"
+    ],
+    "client": [
+	    "net.asyncfabric.impl.client.particle.ExtendedBlockParticleOptionSyncClient"
+    ]
+  },
+  "description": "Hooks for registering custom particles.",
+  "mixins": [
+    "asyncfabric-particles-v1.mixins.json",
+    {
+      "config": "asyncfabric-particles-v1.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  },
+  "accessWidener": "asyncfabric-particles-v1.classtweaker"
+}

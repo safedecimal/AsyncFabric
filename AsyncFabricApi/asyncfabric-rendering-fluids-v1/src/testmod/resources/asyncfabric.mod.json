@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-rendering-fluids-v1-testmod",
+  "name": "AsyncFabric Rendering Fluids (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-rendering-fluids-v1": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.client.rendering.fluid.FabricFluidRenderingTestMod"
+    ],
+    "client": [
+      "net.asyncfabric.test.client.rendering.fluid.FabricFluidRenderingTestModClient"
+    ]
+  }
+}

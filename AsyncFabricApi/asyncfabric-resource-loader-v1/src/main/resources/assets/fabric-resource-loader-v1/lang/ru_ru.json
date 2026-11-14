@@ -1,0 +1,8 @@
+{
+  "commands.datapack.fabric.internal": "Нельзя включить или отключить внутренний набор AsyncFabric «%s».",
+  "pack.description.modResources": "Ресурсы модов.",
+  "pack.name.fabricMod": "Мод AsyncFabric «%s»",
+  "pack.name.fabricMod.subPack": "Мод AsyncFabric «%s» (%s)",
+  "pack.source.builtinMod": "встроенный: %s",
+  "pack.source.fabricmod": "добавлен модом Fabric"
+}

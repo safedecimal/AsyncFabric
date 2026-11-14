@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-resource-conditions-api-v1",
+  "name": "AsyncFabric Resource Conditions API (v1)",
+  "version": "${version}",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-resource-conditions-api-v1/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1"
+  },
+  "description": "Allows conditionally loading resources.",
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.impl.resource.conditions.ResourceConditionsImpl"
+    ]
+  },
+  "mixins": [
+    "asyncfabric-resource-conditions-api-v1.mixins.json"
+  ],
+  "accessWidener": "asyncfabric-resource-conditions-api-v1.classtweaker",
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  }
+}

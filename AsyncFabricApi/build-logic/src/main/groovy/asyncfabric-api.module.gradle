@@ -1,0 +1,14 @@
+import net.asyncfabric.impl.build.FabricApiModuleExtension
+
+plugins {
+	id "asyncfabric-api.module-versioning"
+	id "asyncfabric-api.java"
+	id "asyncfabric-api.lint"
+	id "asyncfabric-api.loom"
+	id "asyncfabric-api.testing"
+	id "asyncfabric-api.module-outputs"
+	id "asyncfabric-api.validation"
+	id "asyncfabric-api.publishing"
+}
+
+extensions.create("fabricApiModule", FabricApiModuleExtension, project)

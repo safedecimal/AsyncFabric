@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-convention-tags-v2-datagen",
+  "name": "AsyncFabric Convention Tags Datagen",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "icon": "assets/asyncfabric-convention-tags-v2/icon.png",
+  "contact": {
+    "homepage": "https://fabricmc.net",
+    "irc": "irc://irc.esper.net:6667/fabric",
+    "issues": "https://github.com/FabricMC/fabric/issues",
+    "sources": "https://github.com/FabricMC/fabric"
+  },
+  "authors": [
+    "FabricMC"
+  ],
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "minecraft": ">=1.18.2"
+  },
+  "description": "Contains common tags used by mods for vanilla things.",
+  "custom": {
+    "fabric-api:module-lifecycle": "stable"
+  },
+  "entrypoints": {
+    "fabric-datagen": [
+      "net.asyncfabric.impl.tag.convention.datagen.DatagenEntrypoint"
+    ]
+  }
+}

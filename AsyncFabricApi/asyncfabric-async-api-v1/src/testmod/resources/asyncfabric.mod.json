@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-async-api-v1-testmod",
+  "name": "AsyncFabric Async API Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.async.AsyncTestMod"
+    ]
+  },
+  "depends": {
+    "asyncfabricloader": ">=0.20.1",
+    "asyncfabric-async-api-v1": "*"
+  }
+}

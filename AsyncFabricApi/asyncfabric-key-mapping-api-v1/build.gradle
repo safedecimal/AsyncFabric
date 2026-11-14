@@ -1,0 +1,11 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+fabricApiModule {
+	testDependencies(
+		':asyncfabric-api-base',
+		':asyncfabric-lifecycle-events-v1',
+		':asyncfabric-resource-loader-v1'
+	)
+}

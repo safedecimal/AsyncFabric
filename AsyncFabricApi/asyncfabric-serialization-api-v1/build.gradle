@@ -1,0 +1,7 @@
+plugins {
+	id 'asyncfabric-api.module'
+}
+
+loom {
+	accessWidenerPath = file('src/main/resources/asyncfabric-serialization-api-v1.classtweaker')
+}

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "asyncfabric-block-api-v1-testmod",
+  "name": "AsyncFabric Block API (v1) Test Mod",
+  "version": "1.0.0",
+  "environment": "*",
+  "license": "Apache-2.0",
+  "depends": {
+    "asyncfabric-block-api-v1": "*"
+  },
+  "entrypoints": {
+    "main": [
+      "net.asyncfabric.test.block.BlockTest"
+    ],
+    "fabric-gametest": [
+      "net.asyncfabric.test.block.BlockGameTest"
+    ]
+  },
+  "mixins": [
+    "asyncfabric-block-api-v1-testmod.mixins.json"
+  ]
+}
