@@ -67,6 +67,10 @@ jobs:
 
       - name: Build API
         working-directory: AsyncFabricApi
+        env:
+          # Marks the API version as a release build. Without it the version suffix comes from
+          # `git rev-parse --abbrev-ref HEAD`, which on a tag checkout answers "HEAD".
+          ASYNC_RELEASE: "true"
         run: bash ./build-api.sh --stacktrace
 
       - name: Collect release files
@@ -83,10 +87,12 @@ jobs:
           done
           cp AsyncFabricLoader/build/libs/asyncfabric-loader-*.json release/ 2>/dev/null || true
 
-          # The aggregate API jar already nests every module.
+          # The aggregate API jar already nests every module. The javadoc classifier here is
+          # "fatjavadoc", not "javadoc", so it needs its own entry; without it an empty 261-byte
+          # jar lands in the release.
           for file in AsyncFabricApi/build/libs/asyncfabric-api-*.jar; do
             case "$file" in
-              *-sources.jar|*-javadoc.jar|*-testmod.jar) ;;
+              *-sources.jar|*-javadoc.jar|*-fatjavadoc.jar|*-testmod.jar) ;;
               *) cp "$file" release/ ;;
             esac
           done
@@ -99,5 +105,9 @@ jobs:
           tag_name: ${{ github.event.inputs.tag || github.ref_name }}
           name: AsyncFabric ${{ github.event.inputs.tag || github.ref_name }}
           body_path: .github/release-notes.md
-          files: release/*.jar
+          # The .json is not cosmetic: the loader resolves Mixin and ASM from it, so a release
+          # without it cannot start. Attaching only `*.jar` silently dropped it.
+          files: |
+            release/*.jar
+            release/*.json
           fail_on_unmatched_files: true

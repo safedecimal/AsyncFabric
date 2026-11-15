@@ -15,8 +15,11 @@ rejected on purpose. Existing Fabric mods will not load.
 | --- | --- |
 | `asyncfabric-loader-<version>.jar` | the loader. Executable: `Main-Class` is `AsyncFabricServerLauncher` |
 | `asyncfabric-loader-<version>.json` | installer metadata, listing the libraries the loader needs |
-| `asyncfabric-api-<version>.jar` | the API, with all 48 module jars nested inside |
-| `asyncfabric-api-<version>-sources.jar` | sources, not needed to play |
+| `asyncfabric-loader-<version>.launchwrapper.json` | the same metadata for the legacy LaunchWrapper route |
+| `asyncfabric-api-<version>.jar` | the API, with every module jar nested inside |
+
+The loader reads its libraries (Mixin, ASM, …) out of the `.json` next to it, so keep that file
+beside the jar. Sources and javadoc jars are not published here; they are build intermediates.
 
 Do **not** also copy the individual `asyncfabric-api-base-*.jar`,
 `asyncfabric-networking-api-v1-*.jar`, … files from a local build: they are already inside

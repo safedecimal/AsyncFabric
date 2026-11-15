@@ -83,10 +83,18 @@ public final class FabricApiBuildUtils {
 	}
 
 	public static String rootVersion(Project project) {
-		Provider<String> branchProvider = project.getProviders().of(GitBranchValueSource.class, spec -> { });
-		String suffix = project.getProviders().environmentVariable("CI").isPresent()
-				? branchProvider.get().replace("/", "_")
-				: "local";
+		if (!project.getProviders().environmentVariable("CI").isPresent()) {
+			return project.findProperty("version") + "+local";
+		}
+
+		// A tag build checks out the tag, so HEAD is detached and `rev-parse --abbrev-ref HEAD`
+		// answers "HEAD" — that shipped a release called 0.166.2+HEAD. A release is marked the
+		// same way the loader marks its release build, so both read "+async".
+		boolean isRelease = project.getProviders().environmentVariable("ASYNC_RELEASE").isPresent();
+		String suffix = isRelease
+				? "async"
+				: project.getProviders().of(GitBranchValueSource.class, spec -> { }).get().replace("/", "_");
+
 		return project.findProperty("version") + "+" + suffix;
 	}
 
