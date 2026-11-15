@@ -77,16 +77,9 @@ jobs:
           fi
 
       - name: Build API
-        # Known unstable. Symptoms: compilation fails with "cannot find symbol" for methods that
-        # only exist through a classtweaker (addTask, completeTask, getFabricPackSource,
-        # getTranslationKey), on a tree whose sources are byte-identical to one that builds. The
-        # failing module set changes between runs, so this is a Loom/remap interaction, not a code
-        # problem. Not yet isolated; see FORK.md. The step is deliberately not silenced: a green
-        # run should mean the API really built.
-        #
-        # -x javadoc: javadoc is not a gate here and needs the full remapped classpath.
+        # Three ordered steps, and the order is load-bearing; build-api.sh explains why.
         working-directory: AsyncFabricApi
-        run: ./gradlew build -x javadoc --stacktrace
+        run: bash ./build-api.sh --stacktrace
 
       - name: Test summary
         if: always()

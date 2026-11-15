@@ -58,3 +58,45 @@ tasks.register("checkNoDuplicateFiles", Zip) {
 }
 
 check.dependsOn "checkNoDuplicateFiles"
+
+/*
+ * Build the jar of every module that publishes a classtweaker before anything else.
+ *
+ * Loom computes each project's remapped Minecraft jar from the classtweakers it can see, and it
+ * reads them out of dependency *jars*. On a clean checkout those jars do not exist yet, so a module
+ * that relies on a `transitive-` entry from a dependency is compiled against a jar where the
+ * injected interface or widened member is missing, and the build fails with "cannot find symbol"
+ * for something the classtweaker was supposed to provide.
+ *
+ * The failure looks random: it appears in a fresh clone, disappears in a warm one where the jars
+ * were left from an earlier run, and the set of failing modules shifts between runs. Building the
+ * providers first makes it deterministic.
+ *
+ * The list is derived from the classtweaker files themselves, so a new module or a newly added
+ * classtweaker is covered without editing this file.
+ */
+def classTweakerProviders = includedModuleProjects.findAll { moduleProject ->
+	moduleProject.file("src/main/resources/${moduleProject.name}.classtweaker").exists()
+			|| moduleProject.file("src/client/resources/${moduleProject.name}.classtweaker").exists()
+}
+
+tasks.register("classTweakerJars") {
+	group = "build"
+	description = "Assembles the jars of every module that publishes a classtweaker"
+
+	dependsOn classTweakerProviders.collect { "${it.path}:jar" }
+}
+
+allprojects { target ->
+	if (target == project || !FabricApiBuildUtils.isFabricModule(target)) {
+		return
+	}
+
+	// withType instead of matching{}.configureEach: the compile tasks are created after this
+	// script runs, and a name-based matcher does not pick them up retroactively.
+	target.tasks.withType(JavaCompile).configureEach { task ->
+		if (task.name == "compileJava" || task.name == "compileClientJava") {
+			task.dependsOn rootProject.tasks.named("classTweakerJars")
+		}
+	}
+}

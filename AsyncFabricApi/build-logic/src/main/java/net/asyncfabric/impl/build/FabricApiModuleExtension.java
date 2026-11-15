@@ -69,6 +69,7 @@ public class FabricApiModuleExtension {
 		dependsOnDependencyClientClasses("compileClientJava", dependencyProjects);
 		addClientClassDirsToCompileTask("compileClientJava", dependencyProjects);
 		addClientClassDirsToCompileTask("compileTestmodClientJava", dependencyProjects);
+		dependsOnDependencyJars(dependencyProjects);
 
 		List<Map<String, String>> dependencyNodes = new ArrayList<>();
 
@@ -150,6 +151,26 @@ public class FabricApiModuleExtension {
 				task.dependsOn(dependencyProject.getPath() + ":clientClasses");
 			}
 		});
+	}
+
+	/**
+	 * Makes this module's compilation and remap wait for the dependency jars to exist.
+	 *
+	 * <p>Loom reads a dependency's classtweaker out of that dependency's <em>jar</em>, not out of
+	 * its class directory. Depending only on {@code classes} therefore compiles the dependency but
+	 * never packages it, so a module that relies on a {@code transitive-} entry (resource-loader's
+	 * {@code Resource -> FabricResource}, for example) fails with "cannot find symbol" for a member
+	 * the classtweaker was supposed to add. It reproduces reliably in a clean build and never in a
+	 * warm one, where the jars happen to be left over from an earlier run.
+	 */
+	private void dependsOnDependencyJars(List<Project> dependencyProjects) {
+		for (String taskName : List.of("compileJava", "compileClientJava", "remapJar")) {
+			project.getTasks().matching(task -> task.getName().equals(taskName)).configureEach(task -> {
+				for (Project dependencyProject : dependencyProjects) {
+					task.dependsOn(dependencyProject.getPath() + ":jar");
+				}
+			});
+		}
 	}
 
 	private void addClientClassDirsToCompileTask(String taskName, List<Project> dependencyProjects) {

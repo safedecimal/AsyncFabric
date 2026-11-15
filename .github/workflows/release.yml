@@ -67,7 +67,7 @@ jobs:
 
       - name: Build API
         working-directory: AsyncFabricApi
-        run: ./gradlew build -x javadoc --stacktrace
+        run: bash ./build-api.sh --stacktrace
 
       - name: Collect release files
         run: |
