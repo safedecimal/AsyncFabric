@@ -211,23 +211,26 @@ through a classtweaker — `addTask`, `completeTask`, `getFabricPackSource`,
 `getTranslationKey`, `PoiTypes.register` — and the set of failing modules changes between
 runs, so it is not a missing source file.
 
-What has been ruled out, all by experiment:
+**Solved** by `AsyncFabricApi/build-api.sh`, which packages the classtweaker-publishing
+modules before the real build. Loom reads a dependency's classtweaker out of that
+dependency's *jar*, so those jars must exist before Loom computes the remapped Minecraft jar
+of a module that depends on them; a warm working copy passed only because stale jars were
+already there. The script builds the base modules first, then the rest one invocation at a
+time with parallelism off, because a single multi-module invocation races for the same jar
+and puts the failure back. Both CI workflows call it.
 
-- **Sources differ.** They do not: `diff -r` over the module trees, and `cmp` over the
-  classtweakers, show byte-identical files against a copy that builds.
-- **Heap.** 4G and 8G both build and both fail; the daemon disappearing was a red herring
-  caused by running two builds at once.
-- **Project parallelism.** `org.gradle.parallel=false`, `--no-parallel` and
-  `--workers.max=1` each produced a green run once and failed on the next attempt.
-- **Configuration cache.** `--no-configuration-cache` made no difference.
-- **Build order.** Pre-building the classtweaker-providing modules, and running the build
-  twice, both helped sometimes and not others.
-- **Absolute path length.** A copy under a shorter path built; a longer one did not; not
-  reproducible.
+## Releasing
 
-What is certain: Loom remaps one Minecraft jar per project, and the resulting artifact's
-content varies with the set of classtweakers present when it is built. Everything points at
-that step, but the trigger has not been isolated.
+The `Release` workflow (`.github/workflows/release.yml`) runs on a `v*` tag push, or on
+`workflow_dispatch` with a `tag` input. A push to `master` publishes nothing: a green `Build`
+run means the artifacts exist as workflow artifacts, not as a release.
 
-The CI workflow deliberately does not hide this: a red run means the API genuinely did not
-build. The loader job passes, so the loader side is exercised on every push.
+```bash
+git tag v0.20.1-async
+git push origin v0.20.1-async
+```
+
+The tag name is only the release label — the version inside the jars comes from the loader's
+`VERSION` and the API's `gradle.properties`. On a tag build the API is marked `+async`;
+`rootVersion` cannot derive a suffix from the branch there, because a tag checkout leaves
+`HEAD` detached and `rev-parse --abbrev-ref HEAD` answers `HEAD`.
